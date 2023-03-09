@@ -23,7 +23,7 @@ export async function activeApplicationWebviewPanel(
   } else {
     applicationWebviewPanel = vscode.window.createWebviewPanel(
       "Serverless-Devs",
-      "应用创建 - Serverless-Devs",
+      "Create application - Serverless-Devs",
       vscode.ViewColumn.One,
       {
         enableScripts: true,

@@ -13,7 +13,7 @@ export async function activeGlobalSettingsWebview(
   } else {
     globalSettingsWebviewPanel = vscode.window.createWebviewPanel(
       "Serverless-Devs",
-      "设置 - Serverless-Devs",
+      "Set up - Serverless-Devs",
       vscode.ViewColumn.One,
       {
         enableScripts: true,

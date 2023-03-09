@@ -3,6 +3,7 @@ import * as path from "path";
 import * as core from "@serverless-devs/core";
 import { ext } from "../../extensionVariables";
 import { TEMPLTE_FILE } from "../../constants";
+import localize from "../../localize";
 
 export async function autoMark(appPath: string) {
   const filePath = path.join(appPath, TEMPLTE_FILE);
@@ -17,7 +18,7 @@ export async function autoMark(appPath: string) {
       if (await checkYaml(spath)) {
         data["marked-yamls"].push({
           path: path.relative(ext.cwd, spath),
-          alias: "默认环境",
+          alias: localize("vscode.default.environment"),
         });
       }
     }
@@ -49,10 +50,10 @@ async function getYamlPath(appPath: string): Promise<string[]> {
 async function fileSearch(dirPath: string, yamlList: string[]) {
   const files = await fsReadDir(dirPath);
   const regexp = new RegExp(/^s(.*?)[.yaml|.yml]$/);
-  const promises = files.map(file => {
+  const promises = files.map((file) => {
     return fsStat(path.join(dirPath, file));
   });
-  const datas = await Promise.all(promises).then(stats => {
+  const datas = await Promise.all(promises).then((stats) => {
     for (let i = 0; i < files.length; i += 1) {
       files[i] = path.join(dirPath, files[i]);
     }
@@ -61,7 +62,7 @@ async function fileSearch(dirPath: string, yamlList: string[]) {
   for (const stat of datas.stats) {
     const index = datas.stats.indexOf(stat);
     const fullFileame = datas.files[index];
-    const filename = fullFileame.split('/').pop();
+    const filename = fullFileame.split("/").pop();
     if (stat.isDirectory()) {
       await fileSearch(datas.files[index], yamlList);
     }

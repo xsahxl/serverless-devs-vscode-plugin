@@ -1,7 +1,7 @@
-import * as vscode from 'vscode';
-import * as core from '@serverless-devs/core';
-import { setPanelIcon, updateWebview } from '../../common';
-import { deleteComponent, getComponentWithAll } from '../../common/component';
+import * as vscode from "vscode";
+import * as core from "@serverless-devs/core";
+import { setPanelIcon, updateWebview } from "../../common";
+import { deleteComponent, getComponentWithAll } from "../../common/component";
 
 let componentWebviewPanel: vscode.WebviewPanel | undefined;
 
@@ -13,17 +13,22 @@ export async function activeComponentWebviewPanel(
   } else {
     componentWebviewPanel = vscode.window.createWebviewPanel(
       "Serverless-Devs",
-      "通过模板进行应用创建 - Serverless-Devs",
+      "Component management - Serverless-Devs",
       vscode.ViewColumn.One,
       {
         enableScripts: true,
-        retainContextWhenHidden: true
+        retainContextWhenHidden: true,
       }
     );
     const componentAll = await getComponentWithAll();
-    await updateWebview(componentWebviewPanel, 'component-management', context, {
-      componentAll
-    });
+    await updateWebview(
+      componentWebviewPanel,
+      "component-management",
+      context,
+      {
+        componentAll,
+      }
+    );
 
     await setPanelIcon(componentWebviewPanel);
     componentWebviewPanel.onDidDispose(
@@ -45,32 +50,39 @@ export async function activeComponentWebviewPanel(
 }
 
 async function handleMessage(message: any, context: vscode.ExtensionContext) {
-  if (message.command === 'deleteComponent') {
+  if (message.command === "deleteComponent") {
     try {
       const res = await vscode.window.showInformationMessage(
         `Are you sure to delete 
-          ${message.component
-          ? message.component
-          : 'All'}
-         component?`, 'yes', 'no');
-      if (res === 'yes') {
+          ${message.component ? message.component : "All"}
+         component?`,
+        "yes",
+        "no"
+      );
+      if (res === "yes") {
         if (message.component) {
           await deleteComponent(message.component);
         } else {
           await deleteComponent();
         }
         vscode.window.showInformationMessage(`
-        Delete ${message.component
-            ? message.component
-            : 'All'} component successful`);
+        Delete ${
+          message.component ? message.component : "All"
+        } component successful`);
         const componentAll = await getComponentWithAll();
-        await updateWebview(componentWebviewPanel, 'component-management', context, {
-          componentAll
-        });
+        await updateWebview(
+          componentWebviewPanel,
+          "component-management",
+          context,
+          {
+            componentAll,
+          }
+        );
       }
     } catch (e) {
       vscode.window.showErrorMessage(
-        `Delete ${message.component} failed.${e.message}`);
+        `Delete ${message.component} failed.${e.message}`
+      );
     }
   }
 }

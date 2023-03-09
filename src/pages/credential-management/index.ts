@@ -1,7 +1,10 @@
 import * as vscode from "vscode";
 import { setPanelIcon, updateWebview } from "../../common";
 import * as core from "@serverless-devs/core";
-import { deleteCredentialByAccess, getCredentialWithAll, } from "../../common/credential";
+import {
+  deleteCredentialByAccess,
+  getCredentialWithAll,
+} from "../../common/credential";
 const { lodash: _ } = core;
 let credentialWebviewPanel: vscode.WebviewPanel | undefined;
 
@@ -13,18 +16,23 @@ export async function activeCredentialWebviewPanel(
   } else {
     credentialWebviewPanel = vscode.window.createWebviewPanel(
       "Serverless-Devs",
-      "新增密钥 - Serverless-Devs",
+      "Add credential - Serverless-Devs",
       vscode.ViewColumn.One,
       {
         enableScripts: true,
-        retainContextWhenHidden: true
+        retainContextWhenHidden: true,
       }
     );
-    await updateWebview(credentialWebviewPanel, 'credential-management', context, {
-      items: core.CONFIG_PROVIDERS,
-      configAccessList: core.CONFIG_ACCESS,
-      data: await getCredentialWithAll()
-    });
+    await updateWebview(
+      credentialWebviewPanel,
+      "credential-management",
+      context,
+      {
+        items: core.CONFIG_PROVIDERS,
+        configAccessList: core.CONFIG_ACCESS,
+        data: await getCredentialWithAll(),
+      }
+    );
     await setPanelIcon(credentialWebviewPanel);
     credentialWebviewPanel.onDidDispose(
       () => {
@@ -36,46 +44,53 @@ export async function activeCredentialWebviewPanel(
     credentialWebviewPanel.webview.onDidReceiveMessage(
       (message) => {
         handleMessage(context, message);
-      }
-      , undefined,
-      context.subscriptions);
+      },
+      undefined,
+      context.subscriptions
+    );
   }
 }
 
-async function handleMessage(
-  context: vscode.ExtensionContext,
-  message: any
-) {
+async function handleMessage(context: vscode.ExtensionContext, message: any) {
   switch (message.command) {
-    case 'getCredential':
+    case "getCredential":
       const data = await getCredentialWithAll();
       credentialWebviewPanel.webview.postMessage({
-        data: data
+        data: data,
       });
       break;
-    case 'deleteCredential':
+    case "deleteCredential":
       try {
         const res = await vscode.window.showInformationMessage(
-          `Are you sure to delete ${message.alias} configuration?`, 'yes', 'no');
-        if (res === 'yes') {
+          `Are you sure to delete ${message.alias} configuration?`,
+          "yes",
+          "no"
+        );
+        if (res === "yes") {
           await deleteCredentialByAccess(message.alias);
-          updateWebview(credentialWebviewPanel, 'credential-management', context, {
-            items: core.CONFIG_PROVIDERS,
-            configAccessList: core.CONFIG_ACCESS,
-            data: await getCredentialWithAll()
-          });
+          updateWebview(
+            credentialWebviewPanel,
+            "credential-management",
+            context,
+            {
+              items: core.CONFIG_PROVIDERS,
+              configAccessList: core.CONFIG_ACCESS,
+              data: await getCredentialWithAll(),
+            }
+          );
         }
       } catch (e) {
         vscode.window.showInformationMessage(
-          `Delete ${message.alias} configuration failed.${e.message}`);
+          `Delete ${message.alias} configuration failed.${e.message}`
+        );
       }
       break;
-    case 'setCredential':
+    case "setCredential":
       const { ...rest } = message.kvPairs;
-      if (message.provider === 'alibaba') {
+      if (message.provider === "alibaba") {
         try {
           const accountId = await core.getAccountId(message.kvPairs);
-          rest['AccountID'] = accountId['AccountId'];
+          rest["AccountID"] = accountId["AccountId"];
         } catch (e) {
           vscode.window.showErrorMessage(`Unable to obtain AccountID,
             please check the input you entered.`);
@@ -84,11 +99,12 @@ async function handleMessage(
       }
       await core.setKnownCredential(rest, message.alias);
       vscode.window.showInformationMessage(
-        `Add ${message.alias} configuration successfully.`);
-      updateWebview(credentialWebviewPanel, 'credential-management', context, {
+        `Add ${message.alias} configuration successfully.`
+      );
+      updateWebview(credentialWebviewPanel, "credential-management", context, {
         items: core.CONFIG_PROVIDERS,
         configAccessList: core.CONFIG_ACCESS,
-        data: await getCredentialWithAll()
+        data: await getCredentialWithAll(),
       });
   }
 }

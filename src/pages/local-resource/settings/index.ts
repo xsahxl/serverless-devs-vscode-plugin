@@ -6,7 +6,6 @@ import * as core from "@serverless-devs/core";
 import { ItemData, getQuickCommands, createTerminal } from "../../../common";
 import { ext } from "../../../extensionVariables";
 import { getComponentInfo } from "../../../services";
-import { CNTranslation } from "../languages";
 import { markYaml } from "../../../commands/mark-yaml";
 const { lodash: _ } = core;
 
@@ -21,7 +20,7 @@ export async function activeLocalResourceSettingsWebview(
   } else {
     localResourceSettingsWebviewPanel = vscode.window.createWebviewPanel(
       "Serverless-Devs",
-      "设置 - Serverless-Devs",
+      "Set up - Serverless-Devs",
       vscode.ViewColumn.One,
       {
         enableScripts: true,
@@ -140,9 +139,7 @@ class UpdateWebview {
         const ele = commands[command];
         if (_.isPlainObject(ele)) {
           for (const key in ele) {
-            const value = CNTranslation[command][key]
-            ? CNTranslation[command][key]
-            : ele[key];
+            const value = ele[key];
             currentCommand.push({ command: key, desc: value });
           }
         } else {
@@ -216,11 +213,11 @@ async function handleMessage(params: { type: string; [key: string]: any }) {
       await event.writeShortcuts(params);
       return;
     case "handleOperate":
-      const lastPathSep = params.spath.lastIndexOf('/');
-      const spath = lastPathSep 
+      const lastPathSep = params.spath.lastIndexOf("/");
+      const spath = lastPathSep
         ? path.join(ext.cwd, params.spath.substring(0, lastPathSep))
         : ext.cwd;
-      const yamlFileName = params.spath.split('/').pop();
+      const yamlFileName = params.spath.split("/").pop();
       createTerminal(params.command, spath, yamlFileName);
       return;
     case "handleConfirmTitle":

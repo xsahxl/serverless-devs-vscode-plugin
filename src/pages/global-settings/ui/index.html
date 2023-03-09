@@ -1,13 +1,14 @@
 <div id="app">
   <div style="display: flex; align-items: center">
     <h1>Set up the hub</h1>
-    <span style="margin-left: 8px">系统功能配置</span>
+    <span style="margin-left: 8px">System feature configuration</span>
   </div>
-  <h2>默认工具工作空间配置</h2>
+  <h2>Default tool workspace configuration</h2>
   <vscode-divider></vscode-divider>
   <div style="margin-top: 16px; opacity: 0.7">
-    在使用Serverless
-    Devs的过程中，我们可能会缓存一些组件到您的电脑空间，如果您想要自定义这部分内容，可以对下面的工作空间路径进行配置。
+    In the use of Serverless during the Devs process, we may cache some
+    components to your computer space, if you want to customize this part of the
+    content, you can configure the following workspace path.
   </div>
   <div
     style="
@@ -17,50 +18,53 @@
       align-items: center;
     "
   >
-    <label>工作空间配置：</label>
+    <label>Workspace configuration:</label>
     <span>{{$config.workspace}}</span>
     <vscode-button
       @click="handleResetWorkspace"
       appearance="secondary"
       style="margin-left: 16px"
     >
-      配置默认路径
+      Configure the default path
     </vscode-button>
     <vscode-button
       appearance="secondary"
       @click="handleManageWorkspace"
       style="margin-left: 16px"
     >
-      管理工作空间
+      Manage workspaces
     </vscode-button>
   </div>
-  <h2 style="margin-top: 36px">数据收集相关配置</h2>
+  <h2 style="margin-top: 36px">Data collection-related configuration</h2>
   <vscode-divider></vscode-divider>
   <div style="margin-top: 16px; opacity: 0.7">
-    为了更好的帮助我们改善Serverless Devs（包括不限于Serverless Devs
-    CLI、Serverless
-    Desktop等），我们可能会采集部分数据，进行分析，也感谢您对我们的支持。当然，如果您不想参与到我们的改善计划，您也可以在下面手动关闭。
+    To help us improve Serverless Devs (including but not limited to Serverless
+    Devs CLI、Serverless Desktop, etc.), we may collect some data for analysis,
+    and thank you for your support to us. Of course, if you do not want to
+    participate in our improvement program, you can also manually close it
+    below.
   </div>
   <vscode-checkbox
     @change="handleAnalysis"
     :checked="$config.analysis==='enable'"
     style="margin-top: 8px; font-size: 16px"
   >
-    数据收集
+    Data Collection
   </vscode-checkbox>
-  <h2 style="margin-top: 36px">Registry 配置</h2>
+  <h2 style="margin-top: 36px">Registry configuration</h2>
   <vscode-divider></vscode-divider>
   <div style="margin-top: 16px; font-size: 16px">
-    <label>当前Registry：</label>
-    <span>http://registry.devsapp.cn/simple</span>
+    <label>Current Registry: </label>
+    <span style="margin-left: 8px">http://registry.devsapp.cn/simple</span>
   </div>
   <div style="margin-top: 8px; opacity: 0.7">
-    IDE插件 目前仅支持 serverless registry, 所以该字段暂不支持修改。
+    The IDE plugin currently only supports serverless registry, so this field
+    does not support modification at the moment.
   </div>
   <vscode-link
     style="margin-top: 36px; font-size: 16px"
     href="https://github.com/Serverless-Devs/Serverless-Devs/issues"
   >
-    问题反馈
+    Problem feedback
   </vscode-link>
 </div>
