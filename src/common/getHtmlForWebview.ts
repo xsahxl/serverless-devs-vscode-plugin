@@ -72,7 +72,7 @@ export function getHtmlForWebview(
     "pages",
     entryName,
     "ui",
-    "index.html"
+    vscode.env.language === "en" ? "index.html" : "index_zh.html"
   );
   const mainUri = getUri(webview, context.extensionUri, [
     "src",
@@ -86,7 +86,7 @@ export function getHtmlForWebview(
     "pages",
     entryName,
     "ui",
-    "index.css"
+    "index.css",
   ]);
 
   // 传入模版的数据挂载到 Vue.prototype.$config 上

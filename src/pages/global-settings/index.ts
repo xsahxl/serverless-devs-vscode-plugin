@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { getHtmlForWebview, setPanelIcon } from "../../common";
 import * as event from "./event";
 import * as core from "@serverless-devs/core";
+import localize from "../../localize";
 
 let globalSettingsWebviewPanel: vscode.WebviewPanel | undefined;
 export async function activeGlobalSettingsWebview(
