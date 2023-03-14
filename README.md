@@ -1,4 +1,4 @@
-![插件](https://serverless-devs-1257396592.cos.ap-nanjing.myqcloud.com/readme-banner.png)
+![image](https://img.alicdn.com/imgextra/i4/O1CN0155HmgU251wF7YKk9D_!!6000000007467-2-tps-1890-719.png)
 
 <p align="center">
   <a href="https://github.com/Serverless-Devs/serverless-devs-vscode-plugin/issues">
@@ -7,34 +7,39 @@
     <img src="https://img.shields.io/github/discussions/serverless-devs/serverless-devs" alt="discussions"></a>
 </p>
 
-**Serverless Devs VSCode 插件**是为方便 Serverless 架构的使用而诞生的。通过 VSCode 插件的形式，用户可以以 GUI+CLI 的方式更好地体验[Serverless Devs](https://github.com/Serverless-Devs/Serverless-Devs)，目前还在开发与内测阶段，但大部分功能已经可以使用了。我们会不断地改善它，争取为广大开发者带来更好的 Serverless 体验。
+**Serverless Devs VSCode Plugin**It was born to facilitate the use of the serverless architecture. Through the form of VSCode plugin, users can better experience [Serverless Devs](https://github.com/Serverless-Devs/Serverless-Devs) in the form of GUI+CLI, which is still in the development and internal testing stage, but most of the functions are already available. We will continue to improve it to bring a better serverless experience to developers.
 
-## 快速开始
+## Get started quickly
 
-1. 安装 Node.js(>=10.8.0) 与 NPM 包管理工具；
+1. Install Node.js(>=12.0.0) and NPM tool;
 
-2. 在 VSCode 中找到我们的应用(建议您搜索全名:**Serverless-devs**)
+2. Find our app in VSCode (we recommend searching for your full name: **Serverless-devs**);
 
-3. 通常情况下，您需要先[获取密钥](https://docs.serverless-devs.com/serverless-devs/default_provider_config/readme)
+3. Typically, you need to get the [credential](https://docs.serverless-devs.com/serverless-devs/default_provider_config/readme) first;
 
-4. 选择创建方式并创建应用
-5. 在新的项目窗口中开发程序并进行编辑配置、部署、构建等操作
+4. Select how you want to create and create the app;
 
-   > 部分功能依赖[Serverless Devs](https://github.com/Serverless-Devs/Serverless-Devs),但插件内会检测并提供安装流程。该插件与[Serverless Devs](https://github.com/Serverless-Devs/Serverless-Devs) 共享本地配置文件。
+5. Develop programs in a new project window and edit configurations, deploy, build, and more
 
-## 帮助内容
+   > Some features rely on [Serverless Devs](https://github.com/Serverless-Devs/Serverless-Devs), but the plugin detects and provides an installation process. The plug-in shares a local configuration file with [Serverless Devs](https://github.com/Serverless-Devs/Serverless-Devs).
 
-> 如果您是第一次上手 serverless 架构，我们还提供了以下内容，可能会对您所有帮助。
+## Help content
 
-- [Serverless Devs 文档](https://docs.serverless-devs.com/serverless-devs/readme)
-- [Yaml 规范](https://docs.serverless-devs.com/serverless-devs/yaml)
-- [Serverless Registry(应用下载)](http://www.devsapp.cn/application.html)
-- [阿里云官网](https://www.aliyun.com/)
+> If you're new to serverless architecture, we've also included the following that might help you all.
 
-## 交流社区
+- [Serverless Devs documentation](https://docs.serverless-devs.com/serverless-devs/readme)
+- [Yaml specification](https://docs.serverless-devs.com/serverless-devs/yaml)
+- [Serverless Registry(App download)](http://www.devsapp.cn/application.html)
+- [Alibaba Cloud official website](https://www.aliyun.com/)
 
-您如果有关于错误的反馈或者未来的期待，您可以在 [Issues](https://github.com/serverless-devs/serverless-devs/issues) 和 [Discussions](https://github.com/serverless-devs/serverless-devs/discussions) 中进行反馈和交流。如果您想要加入我们的讨论组或者了解 Serverless Devs 的最新动态，您可以通过以下渠道进行：
+## Exchange community
+
+If you have feedback about bugs or future expectations, you can post them in [Issues](https://github.com/serverless-devs/serverless-devs-vscode-plugin/issues) and [Discussions](https://github.com/serverless-devs/serverless-devs-vscode-plugin/discussions) for feedback and exchanges. If you'd like to join our discussion group or keep up to date with Serverless Devs, you can do so through the following channels:
+
+<p align="center">
 
 | <img src="https://img.alicdn.com/imgextra/i2/O1CN01zifTV61Mkg9QRNBUs_!!6000000001473-2-tps-466-462.png" width="200px" > | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407044136_20211028074404326599.png" width="200px" > | <img src="https://img.alicdn.com/imgextra/i1/O1CN01ECE9wN1RMvgS6d1JM_!!6000000002098-0-tps-881-877.jpg" width="200px" > |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| 关注微信公众号：`serverless`                                                                                            | 联系微信小助手：`xiaojiangwh`                                                                                                     | 加入钉钉交流群：`33947367`                                                                                              |
+| <center>Follow WeChat Official Account: `serverless`</center>                                                           | <center>Contact WeChat Assistant: `xiaojiangwh`</center>                                                                          | <center>Join DingTalk Group: `33947367`</center>                                                                        |
+
+</p>                                                                                             |
