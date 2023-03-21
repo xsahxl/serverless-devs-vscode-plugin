@@ -22,7 +22,7 @@ export const attrList = {
     id: "applicationlist",
   },
   params: {
-    url: "https://registry.devsapp.cn/package/param",
+    url: `https://registry.devsapp.cn/package/param?lang=${lang}`,
     id: "appParams",
   },
 };
