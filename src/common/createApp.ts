@@ -6,10 +6,11 @@ const { lodash: _, generateRandom } = core;
 const fetch = require("node-fetch");
 import localize from "../localize";
 var qs = require("qs");
+const lang = vscode.env.language === "en" ? "en" : "zh";
 
 export const attrList = {
   category: {
-    url: "https://registry.devsapp.cn/common/category",
+    url: `https://registry.devsapp.cn/console/tabs?type=fc&lang=${lang}`,
     id: "categorylist",
   },
   provider: {
@@ -17,7 +18,7 @@ export const attrList = {
     id: "providerlist",
   },
   application: {
-    url: "https://registry.devsapp.cn/package/search",
+    url: `https://registry.devsapp.cn/console/applications?type=fc&lang=${lang}`,
     id: "applicationlist",
   },
   params: {
@@ -84,17 +85,35 @@ export function replaceDefaultConfig(config: any) {
 
 export async function responseData(panel: vscode.WebviewPanel, sort: string) {
   const categoryFetch = await fetch(attrList["category"]["url"]);
-  const applicationFetch = await fetch(attrList["application"]["url"], {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: qs.stringify({ type: "Application", sort: sort }),
-  });
+  const applicationFetch = await fetch(attrList["application"]["url"]);
+  const applicationRes = await applicationFetch.json();
+  const applicationList = _.get(applicationRes, "Response");
+
+  const categoryRes = await categoryFetch.json();
+  let tabs = _.map(_.get(categoryRes, "Response"), (tab) => ({
+    key: tab.id,
+    name: tab.name,
+    items: _.sortBy(
+      _.filter(applicationList, (app) => _.includes(app.tabs, tab.id)),
+      "x-range"
+    ),
+  }));
+  const one = tabs.shift();
+  const allTemplate = lang === "en" ? "All Templates" : "所有模版";
+
+  if (one) {
+    tabs = [
+      one,
+      { key: "all", name: allTemplate, items: applicationList },
+      ...tabs,
+    ];
+  } else {
+    tabs = [{ key: "all", name: allTemplate, items: applicationList }, ...tabs];
+  }
+
   panel.webview.postMessage({
     command: "responseData",
-    categoryList: await categoryFetch.json(),
-    applicationList: await applicationFetch.json(),
+    templates: tabs,
     aliasList: await core.getCredentialAliasList(),
   });
 }
